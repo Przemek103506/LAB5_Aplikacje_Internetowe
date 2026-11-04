@@ -1,26 +1,49 @@
-async function getAll() {
-    // Pobieranie wszystkich studentów
+const Student = require("../models/Student");
+const mongoose = require("mongoose");
+
+// Pobieranie wszystkich studentów
+async function findAll() {
+    return Student.find().sort({ createdAt: -1 });
 }
 
-async function getById(id) {
-    // Pobieranie studenta po ID
+// Pobieranie studenta po ID
+async function findById(id) {
+    if (!mongoose.isObjectIdOrHexString(id)) {
+        return null;
+    }
+
+    return Student.findById(id);
 }
 
-async function create(student) {
-    // Dodawanie studenta
+// Dodawanie studenta
+async function create(data) {
+    return Student.create(data);
 }
 
-async function update(id, student) {
-    // Aktualizacja studenta
+// Aktualizacja studenta
+async function update(id, data) {
+    if (!mongoose.isObjectIdOrHexString(id)) {
+        return null;
+    }
+
+    return Student.findByIdAndUpdate(id, data, {
+        returnDocument: "after",
+        runValidators: true
+    });
 }
 
+// Usuwanie studenta
 async function remove(id) {
-    // Usuwanie studenta
+    if (!mongoose.isObjectIdOrHexString(id)) {
+        return null;
+    }
+
+    return Student.findByIdAndDelete(id);
 }
 
 module.exports = {
-    getAll,
-    getById,
+    findAll,
+    findById,
     create,
     update,
     remove

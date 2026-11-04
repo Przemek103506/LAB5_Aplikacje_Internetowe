@@ -1,16 +1,15 @@
-const { connectMongo } = require("../src/db/mongo");
+const mongoose = require("mongoose");
+const { mongoUri } = require("../src/config/env");
 
 async function main() {
-    try {
-        await connectMongo();
-        console.log("Test połączenia MongoDB zakończony sukcesem");
-    } catch (error) {
-        console.error("Test MongoDB nie powiódł się");
-        process.exitCode = 1;
-    } finally {
-        const mongoose = require("mongoose");
-        await mongoose.disconnect();
-    }
+    await mongoose.connect(mongoUri);
+
+    console.log("Połączono z MongoDB");
+
+    await mongoose.disconnect();
 }
 
-main();
+main().catch((err) => {
+    console.error(err.message);
+    process.exit(1);
+});
