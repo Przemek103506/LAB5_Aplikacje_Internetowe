@@ -1,0 +1,17 @@
+{
+  "name": "lab5_aplikacje_internetowe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "mongoose": "^9.11.4",
+    "mysql2": "^3.24.6"
+  }
+}
