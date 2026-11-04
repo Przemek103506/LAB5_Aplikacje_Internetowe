@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 
 const studentSchema = new mongoose.Schema(
     {
+        albumNumber: {
+            type: Number,
+            unique: true,
+            sparse: true
+        },
+
         fullName: {
             type: String,
             required: true,
@@ -44,6 +50,19 @@ const studentSchema = new mongoose.Schema(
         }
     },
     { timestamps: true }
+);
+
+// Indeks dla miasta
+studentSchema.index(
+    { city: 1 },
+    { name: "city_1" }
+);
+
+// Indeks złożony: filtrowanie po mieście
+// oraz sortowanie po nazwisku i identyfikatorze
+studentSchema.index(
+    { city: 1, fullName: 1, _id: 1 },
+    { name: "city_fullName_id" }
 );
 
 const Student = mongoose.model("Student", studentSchema);

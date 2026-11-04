@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:mongo": "node scripts/testMongoRepository.js",
     "test:mysql": "node scripts/testMySQLRepository.js",
-    "seed:mongo": "node src/seed/seedStudents.js"
+    "seed:mongo": "node src/seed/seedStudents.js",
+    "test:filter": "node scripts/testMongoFiltering.js",
+    "test:indexes": "node scripts/testMongoIndexes.js"
   },
   "keywords": [],
   "author": "",
